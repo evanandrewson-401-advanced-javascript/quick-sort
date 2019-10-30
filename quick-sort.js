@@ -1,49 +1,61 @@
-const merge = (left, right, arr) => {
-  let i = 0;
-  let j = 0;
-  let k = 0;
+const swap = (arr, i, low) => {
+  let temp;
+  temp = arr[i];
+  arr[i] = arr[low];
+  arr[low] = temp;
+}
 
-  while(i < left.length && j < right.length) {
-    if(left[i] <= right[j]) {
-      arr[k] = left[i];
-      i++;
-    } else {
-      arr[k] = right[j];
-      j++;
+const partition = (arr, left, right) => {
+  const pivot = arr[right];
+  let low = left - 1;
+  for(let i = left; i < right; i++) {
+    if(arr[i] <= pivot) {
+      low++;
+      swap(arr, i, low)
     }
-    k++;
   }
-  if(i === left.length) {
-    while(j < right.length) {
-      arr[k] = right[j]
-      k++;
-      j++;
-    }
-  } else {
-    while(i < left.length) {
-      arr[k] = left[i]
-      k++;
-      i++;
-    }
+  swap(arr, right, low + 1);
+  return low + 1;
+}
+
+const quickSort = (arr, left, right) => {
+  if(left < right) {
+    const position = partition(arr, left, right)
+    quickSort(arr, left, position - 1);
+    quickSort(arr, position + 1, right);
   }
   return arr;
 }
 
-const mergeSort = (arr) => {
-  const n = arr.length
-  let result;
+// ALGORITHM QuickSort(arr, left, right)
+//     if left < right
+//         // Partition the array by setting the position of the pivot value 
+//         DEFINE position <-- Partition(arr, left, right)
+//         // Sort the left
+//         QuickSort(arr, left, position - 1)
+//         // Sort the right
+//         QuickSort(arr, position + 1, right)
 
-  if(n < 2) {
-    return arr;
-  } else {
-    const mid = parseInt(n / 2);
-    const left =arr.slice(0, mid);
-    const right =arr.slice(mid, n);
-    mergeSort(left);
-    mergeSort(right);
-    result = merge(left, right, arr);
-  }
-  return result;
-}
+// ALGORITHM Partition(arr, left, right)
+//     // set a pivot value as a point of reference
+//     DEFINE pivot <-- arr[right]
+//     // create a variable to track the largest index of numbers lower than the defined pivot
+//     DEFINE low <-- left - 1
+//     for i <- left to right do
+//         if arr[i] <= pivot
+//             low++
+//             Swap(arr, i, low)
 
-module.exports = mergeSort;
+//      // place the value of the pivot location in the middle.
+//      // all numbers smaller than the pivot are on the left, larger on the right. 
+//      Swap(arr, right, low + 1)
+//     // return the pivot index point
+//      return low + 1
+
+// ALGORITHM Swap(arr, i, low)
+//     DEFINE temp;
+//     temp <-- arr[i]
+//     arr[i] <-- arr[low]
+//     arr[low] <-- temp
+
+module.exports = quickSort;
