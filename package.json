@@ -1,0 +1,23 @@
+{
+  "name": "insertion-sort",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "jest --verbose --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evanandrewson-401-advanced-javascript/insertion-sort.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evanandrewson-401-advanced-javascript/insertion-sort/issues"
+  },
+  "homepage": "https://github.com/evanandrewson-401-advanced-javascript/insertion-sort#readme",
+  "dependencies": {
+    "jest": "^24.9.0"
+  }
+}
